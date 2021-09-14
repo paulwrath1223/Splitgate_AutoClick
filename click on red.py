@@ -32,6 +32,8 @@ while True:  # Replace with a case for stopping program
         color = getpixel(crossX, crossY)
         if color == (255, 0, 0):  # measure the real value for real program
             print("click")
+
+            # Consider using an arduino to emulate a hardware click
             # pyautogui.click()  # anti cheat :(
             # win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, crossX, crossY, 0, 0)
             # win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, crossX, crossY, 0, 0)
