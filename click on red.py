@@ -1,5 +1,5 @@
 
-import win32api
+import pyautogui
 from pynput.mouse import Button, Controller
 from ctypes import windll
 
@@ -32,7 +32,5 @@ while True:  # Replace with a case for stopping program
         color = getpixel(crossX, crossY)
         if color == (255, 0, 0):  # measure the real value for real program
             print("click")
+            # pyautogui.click()
             break  # remove for actual code
-
-
-
