@@ -2,7 +2,7 @@
 import pyautogui
 from pynput.mouse import Button, Controller
 from ctypes import windll
-
+import win32api, win32con
 
 from screeninfo import get_monitors
 
@@ -32,5 +32,7 @@ while True:  # Replace with a case for stopping program
         color = getpixel(crossX, crossY)
         if color == (255, 0, 0):  # measure the real value for real program
             print("click")
-            # pyautogui.click()
+            # pyautogui.click()  # anti cheat :(
+            # win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, crossX, crossY, 0, 0)
+            # win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, crossX, crossY, 0, 0)
             break  # remove for actual code
