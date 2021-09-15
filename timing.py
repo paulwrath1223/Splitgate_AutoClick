@@ -19,11 +19,8 @@ def getpixel(x,y):
 
 
 start = time.time()
-color = getpixel(crossX,crossY)
-red = color[0]
-blue = color[1]
-green = color[2]
-print("color: R: "+str(red)+"\tB: "+str(blue)+"\tG: "+str(green))
+for i in range(10000):
+    state_left = win32api.GetKeyState(135)
 end = time.time()
 print("Time consumed in working: ",end - start)
 
