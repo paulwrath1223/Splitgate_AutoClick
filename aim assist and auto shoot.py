@@ -11,15 +11,8 @@ def getpixel(x, y):   # timed to take ~ 0.01s
     return tuple(int.to_bytes(windll.gdi32.GetPixel(dc, x, y), 3, "little"))
 
 
-# def on_click(x, y, button, pressed):
-#     print("on_click")
-#     global mouseDown
-#     if button == mouse.Button.left:
-#         mouseDown = pressed
-#
+dc = windll.user32.GetDC(0)  # no idea wtf this does, but it's used in getPixel
 
-dc = windll.user32.GetDC(0)
-# mouse = Controller()
 
 mouseDown = True
 red = False
@@ -54,7 +47,7 @@ while True:  # Replace with a case for stopping program
 
     red = (crossColor == (255, 0, 0))
     state_left = win32api.GetKeyState(135)  # Left button down = 0 or 1. Button up = -127 or -128
-    if state_left == -127 or state_left == -128:
+    if state_left == -127 or state_left == -128:  # Should this be "state_left <= -127"?
         crossColor = getpixel(crossX, crossY)
         if redFallingEdge:
             colorUp = (getpixel(crossX, crossY + 10))
@@ -69,6 +62,8 @@ while True:  # Replace with a case for stopping program
 
             deltaX = strength * (redRatioRight - redRatioLeft)
             deltaY = strength * (redRatioUp - redRatioDown)
+
+            # change mouse pos by deltaX and deltaY
 
         if red:  # measure the real value for real program
             # Consider using an arduino to emulate a hardware click
