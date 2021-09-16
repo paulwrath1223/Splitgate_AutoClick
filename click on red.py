@@ -41,8 +41,8 @@ while True:  # Replace with a case for stopping program
 
     red = (crossColor == (255, 0, 0))
     state_left = win32api.GetKeyState(135)  # Left button down = 0 or 1. Button up = -127 or -128
+    crossColor = getpixel(crossX, crossY)
     if state_left == -127 or state_left == -128:
-        crossColor = getpixel(crossX, crossY)
         if redFallingEdge:
             win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, crossX, crossY, 0, 0)
             win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, crossX, crossY, 0, 0)
