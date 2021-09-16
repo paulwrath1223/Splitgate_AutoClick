@@ -46,9 +46,9 @@ while True:  # Replace with a case for stopping program
         redFallingEdge = False
 
     red = (crossColor == (255, 0, 0))
+    crossColor = getpixel(crossX, crossY)
     state_left = win32api.GetKeyState(135)  # Left button down = 0 or 1. Button up = -127 or -128
     if state_left == -127 or state_left == -128:  # Should this be "state_left <= -127"?
-        crossColor = getpixel(crossX, crossY)
         if redFallingEdge:
             colorUp = (getpixel(crossX, crossY + 10))
             colorDown = (getpixel(crossX, crossY - 10))
