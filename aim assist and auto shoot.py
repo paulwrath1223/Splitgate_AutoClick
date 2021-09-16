@@ -2,7 +2,8 @@
 # from pynput.mouse import Button, Controller
 from ctypes import windll
 
-import win32api, win32con
+import win32api
+import win32con
 
 from screeninfo import get_monitors
 
@@ -39,34 +40,29 @@ crossX = int(monitorX/2)
 crossY = int(monitorY/2)
 crossColor = getpixel(crossX, crossY)
 
-while True:  # Replace with a case for stopping program
-    if red and crossColor != (255, 0, 0):
-        redFallingEdge = True
-    else:
-        redFallingEdge = False
-
+while True:   # Replace with a case for stopping program
     red = (crossColor == (255, 0, 0))
-    crossColor = getpixel(crossX, crossY)
     state_left = win32api.GetKeyState(135)  # Left button down = 0 or 1. Button up = -127 or -128
+    crossColor = getpixel(crossX, crossY)
+
     if state_left == -127 or state_left == -128:  # Should this be "state_left <= -127"?
-        if redFallingEdge:
-            colorUp = (getpixel(crossX, crossY + 10))
-            colorDown = (getpixel(crossX, crossY - 10))
-            colorRight = (getpixel(crossX + 10, crossY))
-            colorLeft = (getpixel(crossX - 10, crossY))
+        colorUp = (getpixel(crossX, crossY + 10))
+        colorDown = (getpixel(crossX, crossY - 10))
+        colorRight = (getpixel(crossX + 10, crossY))
+        colorLeft = (getpixel(crossX - 10, crossY))
 
-            redRatioUp = int(colorUp[0] / sum(list(colorUp)))
-            redRatioDown = int(colorDown[0] / sum(list(colorDown)))
-            redRatioRight = int(colorRight[0] / sum(list(colorRight)))
-            redRatioLeft = int(colorLeft[0] / sum(list(colorLeft)))
+        redRatioUp = int(colorUp[0] / sum(list(colorUp)))
+        redRatioDown = int(colorDown[0] / sum(list(colorDown)))
+        redRatioRight = int(colorRight[0] / sum(list(colorRight)))
+        redRatioLeft = int(colorLeft[0] / sum(list(colorLeft)))
 
-            deltaX = strength * (redRatioRight - redRatioLeft)
-            deltaY = strength * (redRatioUp - redRatioDown)
+        deltaX = strength * (redRatioRight - redRatioLeft)
+        deltaY = strength * (redRatioUp - redRatioDown)
 
-            # change mouse pos by deltaX and deltaY
+        win32api.SetCursorPos((crossX+deltaX, crossY+deltaY))  # change mouse pos by deltaX and deltaY
 
-        if red:  # measure the real value for real program
-            # Consider using an arduino to emulate a hardware click
-            win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, crossX, crossY, 0, 0)
-            win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, crossX, crossY, 0, 0)
-            # remove for actual code
+    if red:  # measure the real value for real program
+        # Consider using an arduino to emulate a hardware click
+        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, crossX, crossY, 0, 0)
+        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, crossX, crossY, 0, 0)
+        # remove for actual code
