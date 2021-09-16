@@ -2,7 +2,8 @@
 # from pynput.mouse import Button, Controller
 from ctypes import windll
 
-import win32api, win32con
+import win32api
+import win32con
 
 from screeninfo import get_monitors
 
@@ -39,7 +40,7 @@ crossX = int(monitorX/2)
 crossY = int(monitorY/2)
 crossColor = getpixel(crossX, crossY)
 
-while True:  # Replace with a case for stopping program
+while True:   # Replace with a case for stopping program
     if red and crossColor != (255, 0, 0):
         redFallingEdge = True
     else:
@@ -63,7 +64,7 @@ while True:  # Replace with a case for stopping program
             deltaX = strength * (redRatioRight - redRatioLeft)
             deltaY = strength * (redRatioUp - redRatioDown)
 
-            # change mouse pos by deltaX and deltaY
+            win32api.SetCursorPos((crossX+deltaX, crossY+deltaY))  # change mouse pos by deltaX and deltaY
 
         if red:  # measure the real value for real program
             # Consider using an arduino to emulate a hardware click
